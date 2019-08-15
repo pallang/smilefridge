@@ -318,7 +318,7 @@ def internal_server_error(e):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
-    # manager.run()
+    # app.run(debug=True)
+    manager.run()
     # db.drop_all()
     # db.create_all()
