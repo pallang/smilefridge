@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Smile Fridge - Home{% endblock %}
+
+{% block page_content %}
+<div class="container">
+    <div class="page.header">
+        <h1>스마일 냉장고 예약</h1>
+        <strong>현재 날짜와 시간은 {{ moment(current_time).format('LLL') }} 입니다.</strong>
+        <h2>
+            안녕하세요! {{ current_user.username }}
+        </h2>
+
+        <button type="button"
+                style="font-size:1.5em; border-radius:0.3em; padding:4px 12px;"
+                onclick="location.href='{{ url_for('set1') }}' ">
+            냉장고 1 예약
+        </button>
+
+        <button type="button"
+                style="font-size:1.5em; border-radius:0.3em; padding:4px 12px;"
+                onclick="location.href='{{ url_for('set2') }}' ">
+            냉장고 2 예약
+        </button>
+
+
+        <hr/>
+
+        <h3>제작진</h3>
+        <p>안세환(ploki808@gmail.com)</p>
+        <p>최민서(chlalstj1005@gmail.com)</p>
+        <p>심동규(simhanson123@gmail.com)</p>
+        <p>최해찬(lookfortheinfinitemathematics@gmail.com)</p>
+        <p>윤효영(yhy6093@gmail.com)</p>
+        <h4>* 오작동 및 문의사항은 메일로 보내주시기 바랍니다.</h4>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Smile Fridge - Register{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>회원가입</h1>
+</div>
+<div class="col-md-4">
+    {{ wtf.quick_form(form) }}
+</div>
+<h3>
+    이미 회원이신가요?
+    <a href="{{ url_for('login') }}">
+        <h3>로그인 하러가기</h3>
+    </a>
+</h3>
+
+{% endblock %}
