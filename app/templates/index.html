@@ -11,15 +11,15 @@
         <h2>
             안녕하세요! {{ current_user.username }}
         </h2>
-
+        <hr/>
         <button type="button"
-                style="font-size:1.5em; border-radius:0.3em; padding:4px 12px;"
+                style="font-size:2em; border-radius:0.2em; padding:4px 12px;"
                 onclick="location.href='{{ url_for('set1') }}' ">
             냉장고 1 예약
         </button>
-
+        <hr/>
         <button type="button"
-                style="font-size:1.5em; border-radius:0.3em; padding:4px 12px;"
+                style="font-size:2em; border-radius:0.2em; padding:4px 12px;"
                 onclick="location.href='{{ url_for('set2') }}' ">
             냉장고 2 예약
         </button>
