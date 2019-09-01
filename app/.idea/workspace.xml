@@ -5,7 +5,7 @@
       <change beforePath="$PROJECT_DIR$/Procfile" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/fridge1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/fridge1.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fridge2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/fridge2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hello.py" beforeDir="false" afterPath="$PROJECT_DIR$/hello.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/runtime.txt" beforeDir="false" />
     </list>
@@ -58,7 +58,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.hello">
+  <component name="RunManager" selected="Python.starter">
     <configuration name="ex" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="app" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -101,7 +101,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="login_manager" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="starter" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="app" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -109,11 +109,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/venv/Lib/site-packages/flask_login" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/venv/Lib/site-packages/flask_login/login_manager.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/starter.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -166,11 +166,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.starter" />
         <item itemvalue="Python.hello" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.ex" />
         <item itemvalue="Python.utils" />
-        <item itemvalue="Python.login_manager" />
       </list>
     </recent_temporary>
   </component>
