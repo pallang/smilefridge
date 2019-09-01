@@ -72,7 +72,6 @@ def make_shell_context():
     return dict(app=app, db=db, User=User, Role=Role)
 # manager.add_command("shell", Shell(make_context=make_shell_context())
 
-
 # 메일전송(실행안함)
 def send_async_email(app, msg):
     with app.app_context():
@@ -87,11 +86,7 @@ def send_email(to, subject, template, **kwargs):
     return thr
 
 
-# 폼
-class NameForm(Form):
-    name = StringField('What is your name?', validators=[Required()])
-    submit = SubmitField('Submit')
-
+# 권한폼
 class Role(db.Model):
     __tablename__ = 'roles'
     id = db.Column(db.Integer, primary_key=True)
@@ -101,6 +96,7 @@ class Role(db.Model):
     def __repr__(self):
         return '<Role %r>' % self.name
 
+# 사용자 데이터
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
@@ -123,12 +119,14 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return '<User %r>' % self.username
 
+# 로그인폼
 class LoginForm(Form):
     email = StringField('Email', validators=[Required(), Length(1), Email()])
     password = PasswordField('Password', validators=[Required()])
     remember_me = BooleanField('Keep me loggend in')
     submit = SubmitField('로그인')
 
+# 회원가입폼
 class RegistrationForm(Form):
     email = StringField('Email', validators=[Required(), Length(1, 64), Email()])
     username = StringField('Username', validators=[Required(), Length(1, 64),
@@ -146,11 +144,13 @@ class RegistrationForm(Form):
         if User.query.filter_by(username=field.data).first():
             raise ValidationError('Username already in use.')
 
+# 냉장고데이터폼
 class SettingForm(Form):
     time = StringField('Days', validators=[Required(), Length(1,2), Regexp('^[0-9]', 0, 'Only number')])
     pin = StringField('PIN', validators=[Required(), Length(1.64), Regexp('^[0-9]', 0, 'Only number')])
     submit = SubmitField('예약')
 
+# 종료폼
 class ShutdownForm(Form):
     submit = SubmitField('지금 사용 종료')
 
@@ -158,18 +158,15 @@ class ShutdownForm(Form):
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-
 # 홈페이지
 @app.route('/', methods=['GET', 'POST'])
 def index():
     return render_template('index.html', current_time=datetime.utcnow())
 
-
 # 설명서
 @app.route('/explain')
 def explain():
     return render_template('explain.html')
-
 
 # 내정보
 @app.route('/user/<name>', methods=['GET','POST'])
@@ -211,7 +208,6 @@ def user(name):
                                    timelimit=timelimit, pinnumber=pinnumber, username=lst2[0])
     return render_template('user.html', name=current_user.username, usedata=usedata, timelimit=timelimit, pinnumber=pinnumber)
 
-
 # 회원가입, 로그인, 로그아웃
 @app.route('/secret')
 @login_required
@@ -246,8 +242,7 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
-
-# 냉장고 예약
+# 냉장고1 예약
 @app.route('/set1', methods=['GET', 'POST'])
 @login_required
 def set1():
@@ -276,6 +271,7 @@ def set1():
     flash('냉장고가 사용 중입니다. 다른 냉장고를 이용해주세요.')
     return render_template('index.html', current_time=datetime.utcnow())
 
+# 냉장고2 예약
 @app.route('/set2', methods=['GET', 'POST'])
 @login_required
 def set2():
@@ -304,8 +300,6 @@ def set2():
     flash('냉장고가 사용 중입니다. 다른 냉장고를 이용해주세요.')
     return render_template('index.html', current_time=datetime.utcnow())
 
-
-
 # Errorhandler
 @app.errorhandler(404)
 def page_not_found(e):
@@ -316,9 +310,9 @@ def internal_server_error(e):
     return render_template('500.html'), 500
 
 
-
+# 실행
 if __name__ == '__main__':
-    # app.run(debug=True)
-    manager.run()
+    app.run(host='1.233.239.66', port='80', debug=True)
+    # manager.run()
     # db.drop_all()
     # db.create_all()
