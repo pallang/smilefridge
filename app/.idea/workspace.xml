@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac19eb88-c855-4457-a49e-4e83865ed23c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Procfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fridge1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/fridge1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fridge2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/fridge2.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hello.py" beforeDir="false" afterPath="$PROJECT_DIR$/hello.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/runtime.txt" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,12 +29,18 @@
   <component name="IgnoredFileRootStore">
     <option name="generatedRoots">
       <set>
-        <option value="C:\Users\shan99\Documents\GitHub\smilefridge\app\.idea" />
+        <option value="C:\Users\shan99\Documents\app\.idea" />
       </set>
     </option>
   </component>
+  <component name="ProjectConfigurationFiles">
+    <option name="files">
+      <list>
+        <option value="$PROJECT_DIR$/.idea/.gitignore" />
+      </list>
+    </option>
+  </component>
   <component name="ProjectId" id="1PBmkvaclWmauMt2qYOopkIAWQD" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
