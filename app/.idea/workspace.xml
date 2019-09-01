@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ac19eb88-c855-4457-a49e-4e83865ed23c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/Procfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/data.sqlite" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fridge1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/fridge1.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fridge2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/fridge2.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hello.py" beforeDir="false" />
