@@ -9,17 +9,17 @@
         <h1>스마일 냉장고 예약</h1>
         <strong>현재 날짜와 시간은 {{ moment(current_time).format('LLL') }} 입니다.</strong>
         <h2>
-            안녕하세요! {{ current_user.username }}
+            안녕하세요! 아래 버튼을 눌러 냉장고를 예약해주세요!
         </h2>
 
         <button type="button"
-                style="font-size:1.5em; border-radius:0.3em; padding:4px 12px;"
+                style="font-size:1.5em; border-radius:0.3em; padding:4px 16px;"
                 onclick="location.href='{{ url_for('set1') }}' ">
             냉장고 1 예약
         </button>
 
         <button type="button"
-                style="font-size:1.5em; border-radius:0.3em; padding:4px 12px;"
+                style="font-size:1.5em; border-radius:0.3em; padding:4px 16px;"
                 onclick="location.href='{{ url_for('set2') }}' ">
             냉장고 2 예약
         </button>

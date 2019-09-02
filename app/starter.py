@@ -49,7 +49,7 @@ password_hash = db.Column(db.String(128))
 # 기간끝난 냉장고 사용 종료
 def delete_txt():
     while True:
-        sleep(86400)
+        sleep(43200)
         with open('fridge1.txt') as f1, open('fridge2.txt') as f2:
             lst1_date_ = f1.read().splitlines()
             lst2_date_ = f2.read().splitlines()
@@ -121,33 +121,33 @@ class User(UserMixin, db.Model):
 
 # 로그인폼
 class LoginForm(Form):
-    email = StringField('Email', validators=[Required(), Length(1), Email()])
-    password = PasswordField('Password', validators=[Required()])
-    remember_me = BooleanField('Keep me loggend in')
+    email = StringField('이메일', validators=[Required(), Length(1), Email()])
+    password = PasswordField('비밀번호', validators=[Required()])
+    remember_me = BooleanField('로그인 유지')
     submit = SubmitField('로그인')
 
 # 회원가입폼
 class RegistrationForm(Form):
-    email = StringField('Email', validators=[Required(), Length(1, 64), Email()])
-    username = StringField('Username', validators=[Required(), Length(1, 64),
-                                                   Regexp('^[가-힣A-Za-z][가-힣A-Za-z0-9_.]*$', 0, 'Usernames must have only letters, '
-                                                          'numbers, dots or underscores')])
-    password = PasswordField('Password', validators=[Required(), EqualTo('password2', message='Passwords must match.')])
-    password2 = PasswordField('Confirm Password', validators=[Required()])
+    email = StringField('이메일', validators=[Required(), Length(1, 64), Email()])
+    username = StringField('이름', validators=[Required(), Length(1, 64),
+                                                   Regexp('^[가-힣A-Za-z][가-힣A-Za-z]*$', 0, '이름은 한글 또는 영어만 가능합니다.')])
+    password = PasswordField('비밀번호', validators=[Required(), EqualTo('password2', message='비밀번호가 일치합니다.')])
+    password2 = PasswordField('비밀번호 확인', validators=[Required()])
     submit = SubmitField('회원가입')
 
     def validate_email(self, field):
         if User.query.filter_by(email=field.data).first():
-            raise ValidationError('Email already registered.')
+            raise ValidationError('이미 가입된 이메일입니다.')
 
+    # 동명이인일 경우를 생각해 뺏더니 데이터베이스에 갱신이 안됨
     def validate_username(self, field):
         if User.query.filter_by(username=field.data).first():
             raise ValidationError('Username already in use.')
 
 # 냉장고데이터폼
 class SettingForm(Form):
-    time = StringField('Days', validators=[Required(), Length(1,2), Regexp('^[0-9]', 0, 'Only number')])
-    pin = StringField('PIN', validators=[Required(), Length(1.64), Regexp('^[0-9]', 0, 'Only number')])
+    time = StringField('사용할 날짜', validators=[Required(), Length(1,2), Regexp('^[0-9]', 0, 'Only number')])
+    pin = StringField('냉장고 암호', validators=[Required(), Length(1.64), Regexp('^[0-9]', 0, 'Only number')])
     submit = SubmitField('예약')
 
 # 종료폼
@@ -175,13 +175,13 @@ def user(name):
     with open('fridge1.txt') as f1:
         lst1 = f1.read().splitlines()
         if not lst1:
-            usedata='냉장고를 이용하지 않고 있습니다.'
+            usedata='현재 이용중인 냉장고가 없습니다.'
             timelimit=''
             pinnumber=''
         elif lst1[0] == current_user.username:
             usedata = '첫번째 냉장고를 사용 중입니다.'
             timelimit = '사용 종료일은 ' + lst1[2] + '입니다.'
-            pinnumber = '설정된 핀번호는 ' + lst1[3] + '입니다.'
+            pinnumber = '설정된 냉장고 암호는 ' + lst1[3] + '입니다.'
             form = ShutdownForm()
             if form.validate_on_submit():
                 with open('fridge1.txt', 'w') as f1:
@@ -192,13 +192,13 @@ def user(name):
     with open('fridge2.txt') as f1:
         lst2 = f1.read().splitlines()
         if not lst2:
-            usedata = '냉장고를 이용하지 않고 있습니다.'
+            usedata = '현재 이용중인 냉장고가 없습니다.'
             timelimit = ''
             pinnumber = ''
         elif lst2[0] == current_user.username:
             usedata = '두번째 냉장고를 사용 중입니다.'
             timelimit = '사용 종료일은 ' + lst2[2] + '입니다.'
-            pinnumber = '설정된 핀번호는 ' + lst2[3] + '입니다.'
+            pinnumber = '설정된 냉장고 암호는 ' + lst2[3] + '입니다.'
             form = ShutdownForm()
             if form.validate_on_submit():
                 with open('fridge2.txt', 'w') as f2:
@@ -208,12 +208,13 @@ def user(name):
                                    timelimit=timelimit, pinnumber=pinnumber, username=lst2[0])
     return render_template('user.html', name=current_user.username, usedata=usedata, timelimit=timelimit, pinnumber=pinnumber)
 
-# 회원가입, 로그인, 로그아웃
+# 암호화
 @app.route('/secret')
 @login_required
 def secret():
     return 'Only authenticated users are allowed!'
 
+# 로그인
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -222,23 +223,25 @@ def login():
         if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)
             return redirect(request.args.get('next') or url_for('index'))
-        flash('Invalid username or password')
+        flash('잘못된 이메일 또는 비밀번호 입니다.')
     return render_template('login.html', form=form)
 
+# 로그아웃
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
-    flash('You have been logged out.')
+    flash('성공적으로 로그아웃 되었습니다.')
     return redirect(url_for('index'))
 
+# 회원가입
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         user = User(email=form.email.data, username=form.username.data, password=form.password.data)
         db.session.add(user)
-        flash('You can now login.')
+        flash('회원가입을 완료하였습니다.')
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
@@ -312,7 +315,7 @@ def internal_server_error(e):
 
 # 실행
 if __name__ == '__main__':
-    app.run(host='1.233.239.66', port='80', debug=True)
+    app.run(debug=True)
     # manager.run()
     # db.drop_all()
     # db.create_all()
