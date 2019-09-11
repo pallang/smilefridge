@@ -303,6 +303,18 @@ def set2():
     flash('냉장고가 사용 중입니다. 다른 냉장고를 이용해주세요.')
     return render_template('index.html', current_time=datetime.utcnow())
 
+# 데이터 처리
+@app.route('/fridge1')
+def read1_txt():
+    f = open('fridge1.txt')
+    return "</br>".join(f.readlines())
+
+@app.route('/fridge2')
+def read2_txt():
+    f = open('fridge2.txt')
+    return "</br>".join(f.readlines())
+
+
 # Errorhandler
 @app.errorhandler(404)
 def page_not_found(e):
@@ -315,7 +327,7 @@ def internal_server_error(e):
 
 # 실행
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='1.233.239.66', port='80', threaded=True)
     # manager.run()
     # db.drop_all()
     # db.create_all()
